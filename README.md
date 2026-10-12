@@ -22,3 +22,11 @@ On-time orders average 4.29 stars, while late orders average 2.57 stars.
 Python, SQLite, pandas, matplotlib, Jupyter Notebook
 
 Dataset: Brazilian E-Commerce Public Dataset by Olist (Kaggle)
+
+## SQL Queries
+Saved in the `queries/` folder:
+- 01_total_orders_revenue.sql
+- 02_orders_by_status.sql
+- 03_top_categories.sql
+- 04_monthly_orders.sql
+- 05_payment_type_split.sql
