@@ -47,3 +47,36 @@
 
 ### Problem I faced
 - Jupyter created an empty ecommerce.db because of a relative path. Fix: use the full path to the real database (111.7 MB).
+
+## Day 4: Medium queries
+
+- Saved 4 medium queries as .sql files (06 to 09) and pushed them to GitHub
+- Practiced multiple JOINs, subqueries, CASE WHEN and date functions
+
+### Query 6: Average order value (06_avg_order_value.sql)
+- Question: What is the average value of an order?
+- Logic: SUM(payment_value) divided by COUNT(DISTINCT order_id), so each order is counted once.
+- Insight: Average order value is [avg_order_value] (Brazilian reais).
+
+### Query 7: Revenue by state (07_revenue_by_state.sql)
+- Question: Which customer states bring the most revenue?
+- Logic: JOIN orders with customers (state is stored in customers) and with payments (revenue is stored in payments). GROUP BY customer_state.
+- Why 3 tables: no single table has order, state and payment together.
+- Insight: [top state] is the top state with [revenue] revenue from [total_orders] orders.
+
+### Query 8: Repeat customers (08_repeat_customers.sql)
+- Question: How many customers ordered more than once?
+- Logic: The subquery counts orders per customer. The outer query uses CASE WHEN to count customers with more than 1 order.
+- Why customer_unique_id: customer_id changes on every order, so customer_unique_id identifies the real person.
+- Insight: [repeat_customers] out of [total_customers] customers ([repeat_pct]%) ordered more than once.
+
+### Query 9: Delivery days by state (09_delivery_days_by_state.sql)
+- Question: How many days does delivery take in each state?
+- Logic: julianday() converts dates to numbers, so delivery date minus purchase date gives days. AVG per state.
+- Why WHERE order_status = 'delivered': orders that are not delivered have an empty delivery date.
+- Insight: [slowest state] is the slowest with [avg_delivery_days] days. [fastest state] is the fastest with [avg_delivery_days] days.
+
+### Interview questions I should be able to answer
+- INNER JOIN vs LEFT JOIN: INNER JOIN keeps only matching rows. LEFT JOIN keeps all rows from the left table.
+- WHERE vs HAVING: WHERE filters rows before grouping. HAVING filters groups after GROUP BY.
+- Why a subquery in Query 8: to first get the order count per customer, then count how many have more than 1.
